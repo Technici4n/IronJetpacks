@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.MinecraftDedicatedServer;
 import net.minecraft.util.Identifier;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.function.Supplier;
 
@@ -56,6 +57,13 @@ public class IronJetpacks implements ModInitializer {
                 Class.forName("com.blakebr0.ironjetpacks.client.IronJetpacksClient").getDeclaredMethod("onInitializeClient").invoke(null);
             } catch (Exception e) {
                 throw new RuntimeException(e);
+            }
+        }
+        if (FabricLoader.getInstance().isModLoaded("fasttransferlib")) {
+            try {
+                Class.forName("com.blakebr0.ironjetpacks.compat.ftl.FtlCompat").getMethod("init").invoke(null);
+            } catch (Exception e) {
+                LogManager.getLogger(NAME).error("Exception thrown while loading FTL energy compat: " + e);
             }
         }
         

@@ -14,6 +14,15 @@ repositories {
     jcenter()
     maven { url "https://dl.bintray.com/shedaniel/cloth" }
     maven { url "https://dl.bintray.com/shedaniel/legacy-yarn-updated" }
+    // for FTL
+    maven {
+        name = "Technici4n"
+        url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
+        content {
+            includeGroup "net.fabricmc.fabric-api" // until fabric-api-lookup-api-v1 is merged
+            includeGroup "dev.technici4n"
+        }
+    }
 }
 
 dependencies {
@@ -46,6 +55,7 @@ dependencies {
     modImplementation("me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}"){
         exclude(group: "net.fabricmc.fabric-api")
     }
+    modCompileOnly("dev.technici4n:FastTransferLib:${project.ftl_version}")
 }
 
 processResources {
